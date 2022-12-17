@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
-dog=cv2.imread('cat.jpg')
-new=cv2.resize(dog,dsize=None,fx=0.5,fy=0.5,interpolation=cv2.INTER_AREA)
-cv2.imwrite('1.jpg',new)
+dog=cv2.imread('hujiao.jpg')
+dst = cv2.medianBlur(dog,9)
+cv2.imshow('img', np.hstack((dog, dst)))
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
