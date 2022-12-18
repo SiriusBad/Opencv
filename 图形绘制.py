@@ -29,7 +29,7 @@ putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bott
 # cv2.line(img, (80, 100), (380, 480), (0, 0, 255), 5, 16)
 
 # 画矩形
-# cv2.rectangle(img, (10,10), (100, 100), (0, 0, 255), -1)
+# cv2.rectangle(img, (10,10), (100, 100), (0, 0, 255), -1)         #提供任意一条对角线的两端点即可
 
 # 画圆
 # cv2.circle(img, (320, 240), 100, (0, 0, 255))
