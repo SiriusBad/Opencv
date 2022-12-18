@@ -4,12 +4,12 @@ import numpy as np
 
 img = cv2.VideoCapture(1)
 pointsList = []
-
+ret, frame = img.read()
 def mousePoints(event, x, y, flags, params):
     if event == cv2.EVENT_LBUTTONDOWN:
         size = len(pointsList)
         if size != 0 and size % 3 != 0:
-            cv2.line(frame, tuple(pointsList[0]), (x, y), (0, 0, 255), 2)
+            cv2.line(frame, tuple(pointsList[round((size-1)/3)*3]), (x, y), (0, 0, 255), 2)
         cv2.circle(frame, (x, y), 5, (0, 0, 255), cv2.FILLED)
         pointsList.append([x, y])
 
@@ -47,16 +47,20 @@ while True:
     if not ret:
         break
     frame = cv2.flip(frame, 1)
-    # frame = np.ascontiguousarray(frame)
-    if len(pointsList) % 3 == 0 and len(pointsList) != 0:
-        getAngle(pointsList)
-
+    Frame = frame
     cv2.imshow('Image', frame)
-    cv2.setMouseCallback('Image', mousePoints)
-    key = cv2.waitKey(1)
-    if key & 0xFF == ord('c'):
+    key2 = cv2.waitKey(1)
+    if key2 & 0xFF == ord('b'):
         pointsList = []
-    if key & 0xFF == ord('q'):
+        while True:
+            if len(pointsList) % 3 == 0 and len(pointsList) != 0:
+                getAngle(pointsList)
+            cv2.imshow('I', frame)
+            cv2.setMouseCallback('I', mousePoints)
+            key1 = cv2.waitKey(1)
+            if key1 & 0xFF == ord('q'):
+                break
+    if key2 & 0xFF == ord('q'):
         break
 
 img.release()
