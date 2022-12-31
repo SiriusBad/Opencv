@@ -37,12 +37,11 @@ while True:
         x0, y0 = lmList[0][1], lmList[0][2]
         x1, y1 = lmList[4][1], lmList[4][2]
         x2, y2 = lmList[8][1], lmList[8][2]
-        cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
 
         cv2.circle(img, (x1, y1), 15, (255, 0, 255), cv2.FILLED)
         cv2.circle(img, (x2, y2), 15, (255, 0, 255), cv2.FILLED)
-        cv2.line(img, (x1, y1), (x2, y2), (255, 0, 255), 3)
-        cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+        cv2.line(img, (x1, y1), (x0, y0), (255, 255, 0), 3)
+        cv2.line(img, (x0, y0), (x2, y2), (255, 255, 0), 3)
 
         if (x1-x0) != 0 and (x2-x0) != 0:
             gradient1 = round(math.degrees(math.atan(abs(y1 - y0) / abs(x1 - x0))), 2)
@@ -61,7 +60,8 @@ while True:
         volume.SetMasterVolumeLevel(vol, None)
 
         if gradient < 4:
-            cv2.circle(img, (cx, cy), 15, (0, 255, 0), cv2.FILLED)
+            cv2.line(img, (x1, y1), (x0, y0), (0, 255, 0), 3)
+            cv2.line(img, (x0, y0), (x2, y2), (0, 255, 0), 3)
 
     cv2.rectangle(img, (50, 150), (85, 400), (255, 0, 0), 3)
     cv2.rectangle(img, (50, int(volBar)), (85, 400), (255, 0, 0), cv2.FILLED)
