@@ -5,7 +5,7 @@ img = np.zeros((480, 640, 3), np.uint8)
 """line(img, pt1, pt2, color, thickness, lineType, shift) 画直线
          img: 在哪个图像上画线
          pt1, pt2: 开始点, 结束点. 指定线的开始与结束位置
-         color: 颜色
+         color: 颜色  BGR
          thickness: 线宽
          lineType: 线型.线型为-1, 4, 8, 16, 默认为8
          shift: 坐标缩放比例.

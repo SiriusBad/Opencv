@@ -40,8 +40,9 @@ while True:
 
         cv2.circle(img, (x1, y1), 15, (255, 0, 255), cv2.FILLED)
         cv2.circle(img, (x2, y2), 15, (255, 0, 255), cv2.FILLED)
-        cv2.line(img, (x1, y1), (x0, y0), (255, 255, 0), 3)
-        cv2.line(img, (x0, y0), (x2, y2), (255, 255, 0), 3)
+        cv2.line(img, (x1, y1), (x0, y0), (0, 255, 255), 3)
+        cv2.line(img, (x0, y0), (x2, y2), (0, 255, 255), 3)
+        cv2.line(img, (x1, y1), (x2, y2), (238, 104, 123), 3)
 
         if (x1-x0) != 0 and (x2-x0) != 0:
             gradient1 = round(math.degrees(math.atan(abs(y1 - y0) / abs(x1 - x0))), 2)
