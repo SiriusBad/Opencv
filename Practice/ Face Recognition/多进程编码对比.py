@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 path = 'ImagesAttendance'
 images = []
+encodeList = []
 myList = os.listdir(path)
 def read(cl):
     global images
@@ -16,20 +17,29 @@ def read(cl):
     return images
 
 def findEncodings(images):
-    encodeList = []
+    global encodeList
 
     for img in images:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
-    return encodeList
+
+def find(images):
+    List = []
+
+    for img in images:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        encode = face_recognition.face_encodings(img)[0]
+        List.append(encode)
+    return List
 
 if __name__ == '__main__':
     t = time.time()
     with ThreadPoolExecutor() as pool:       #多线程
         pool.map(read ,myList)
-    with ProcessPoolExecutor() as pool:      #多进程
-        pool.map(findEncodings,images)
+    with ThreadPoolExecutor() as pool:
+        encodeList = pool.map(find,images)
+    print(encodeList)
     print('改进后时间:',time.time() - t)
 
     t = time.time()
@@ -38,6 +48,6 @@ if __name__ == '__main__':
     for cl in myList:
         curImg = cv2.imread(f'{path}/{cl}')
         images.append(curImg)
-    findEncodings(images)
+    print(find(images))
     print('时间:',time.time() - t)
 
